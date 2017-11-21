@@ -58,4 +58,16 @@ export class DashboardComponent implements OnInit {
         const index: number = this.alerts.indexOf(alert);
         this.alerts.splice(index, 1);
     }
+
+    edit()
+    {
+        alert(2);
+
+    }
+
+    delete ()
+    {
+        alert(1);
+    }
+
 }
