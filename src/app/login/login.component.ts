@@ -22,7 +22,6 @@ export class LoginComponent implements OnInit {
             .then((data) => {
                 console.log('Usuario Logado ' + data.email);
                 localStorage.setItem('isLoggedin', 'true');
-
             }, (error) => {
                 console.log(error);
                 
