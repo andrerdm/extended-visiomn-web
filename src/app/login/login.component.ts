@@ -10,26 +10,23 @@ import * as firebase from 'firebase/app';
     animations: [routerTransition()]
 })
 export class LoginComponent implements OnInit {
-
     public email: string;
     public password: string;
-    constructor(public router: Router) 
-    {
-        this.email = "";
-        this.password = "";       
+
+    constructor(public router: Router) {
+        this.email = '';
+        this.password = '';
     }
 
-    ngOnInit() {}   
+    ngOnInit() {}
 
     onLoggedin() {
-        alert(1);
-        alert(this.email);
-        alert(this.password);
-        firebase.auth().signInWithEmailAndPassword(this.email, this.password).catch(function(error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            // ...
-          });
+        firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+        .then((data) => {
+            console.log('Usuario logado');
+            localStorage.setItem('isLoggedin', 'true');
+        }, (error) => {
+            console.log(error);
+        });
     }
 }
