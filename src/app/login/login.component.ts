@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
+import { NgModule } from '@angular/core';
 import { routerTransition } from '../router.animations';
 import * as firebase from 'firebase/app';
 import { FirebaseProvider } from '../providers/firebase/firebase'
@@ -22,6 +23,9 @@ export class LoginComponent implements OnInit {
     ngOnInit() {}   
 
     onLoggedin() {
+        alert(this.email);
+        alert(this.password)
+        
         this.email = "denilson.rv@hotmail.com";
         this.password = ")(*)(8lnlknLKASd!@@";
         console.log("Iniciando Login");
