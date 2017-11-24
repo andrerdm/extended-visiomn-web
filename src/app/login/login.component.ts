@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NgModule } from '@angular/core';
 import { routerTransition } from '../router.animations';
-import * as firebase from 'firebase/app';
+import { FirebaseProvider } from '../providers/firebase/firebase';
 
 @Component({
     selector: 'app-login',
@@ -10,23 +10,39 @@ import * as firebase from 'firebase/app';
     animations: [routerTransition()]
 })
 export class LoginComponent implements OnInit {
-    public email: string;
-    public password: string;
 
-    constructor(public router: Router) {
-        this.email = '';
-        this.password = '';
+    constructor(public fp: FirebaseProvider) {
     }
 
     ngOnInit() {}
 
     onLoggedin() {
-        firebase.auth().signInWithEmailAndPassword(this.email, this.password)
-        .then((data) => {
-            console.log('Usuario logado');
-            localStorage.setItem('isLoggedin', 'true');
-        }, (error) => {
-            console.log(error);
-        });
+        console.log('Iniciando Login');
+        this.fp.signInWithEmailAndPassword('denilson.rv@hotmail.com', ')(*)(8lnlknLKASd!@@')
+            .then((data) => {
+                console.log('Usuario Logado ' + data.email);
+                localStorage.setItem('isLoggedin', 'true');
+
+            }, (error) => {
+                console.log(error);
+                
+                let errorMessage;
+                switch (error.code) {
+                    case 'auth/invalid-email':
+                      errorMessage = 'Insira um email válido.';
+                      break;
+                    case 'auth/wrong-password':
+                      errorMessage = 'Combinação de usuário e senha incorreta.';
+                      break;
+                    case 'auth/user-not-found':
+                      errorMessage = 'Combinação de usuário e senha incorreta.';
+                      break;
+                    default:
+                      errorMessage = error;
+                      break;
+                }
+
+                alert(errorMessage);
+            });
     }
 }
