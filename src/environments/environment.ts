@@ -14,5 +14,4 @@ export const environment = {
     storageBucket: "extended-vision-64c3e.appspot.com",
     messagingSenderId: "893367303017"
   }
-  
 };
