@@ -8,13 +8,13 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { environment } from '../environments/environment';
 import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireDatabaseModule, AngularFireList } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
-import { FirebaseProvider } from '../app/providers/firebase/firebase';
+import { FirebaseProvider } from '../app/providers/firebase/FirebaseProvider';
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
@@ -42,7 +42,7 @@ export function createTranslateLoader(http: HttpClient) {
         AppRoutingModule
     ],
     declarations: [AppComponent],
-    providers: [AuthGuard,FirebaseProvider],
+    providers: [AuthGuard, FirebaseProvider],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

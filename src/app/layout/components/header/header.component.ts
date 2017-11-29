@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { FirebaseProvider } from '../../../providers/firebase/FirebaseProvider';
 
 @Component({
     selector: 'app-header',
@@ -9,8 +10,9 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class HeaderComponent implements OnInit {
     pushRightClass: string = 'push-right';
+    user: string;
 
-    constructor(private translate: TranslateService, public router: Router) {
+    constructor(private translate: TranslateService, public router: Router, public fp: FirebaseProvider) {
         this.router.events.subscribe(val => {
             if (
                 val instanceof NavigationEnd &&
@@ -22,7 +24,11 @@ export class HeaderComponent implements OnInit {
         });
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.fp.getUserInfo().subscribe((data) => {
+            this.user = data.email;
+        });
+    }
 
     isToggled(): boolean {
         const dom: Element = document.querySelector('body');

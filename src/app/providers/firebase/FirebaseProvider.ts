@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase/app';
+import { BeaconData } from '../../models/BeaconData';
 
 @Injectable()
 export class FirebaseProvider {
-  public user: Observable<firebase.User>;
 
-  constructor(public afAuth: AngularFireAuth) {
-    this.user = afAuth.authState;
+  constructor(public afAuth: AngularFireAuth, public afDB: AngularFireDatabase) {
   }
 
   signInWithEmailAndPassword(email: string, password: string): Promise<any> {
@@ -19,6 +19,14 @@ export class FirebaseProvider {
         reject(error);
       });
     });
+  }
+
+  listBeacons(): AngularFireList<BeaconData[]> {
+    return this.afDB.list('/beacons/');
+  }
+
+  getUserInfo(): Observable<firebase.User> {
+    return this.afAuth.authState;
   }
 
 }

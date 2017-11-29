@@ -7,6 +7,7 @@
                 <thead>
                 <tr>
                     <th>Nome</th>
+                    <th>Beacon ID</th>
                     <th>Força do Sinal</th>
                     <th>Mensagem</th>
                     <th></th>
@@ -14,24 +15,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>Secretaria</td>
+                <tr *ngFor='let beacon of beaconList | async'>
+                    <td>{{beacon.name}}</td>
+                    <td>{{beacon.id}}</td>
                     <td>Forte - 5m</td>
-                    <td>Voçê está próximo da secretaria.</td>
-                    <td><a (click)="edit()">Editar</a></td>
-                    <td><a (click)="delete()">Excluir</a></td>
-                </tr>
-                <tr>
-                    <td>Sala de Aula - Sistemas de Informação</td>
-                    <td>Médio - 3m</td>
-                    <td>Sala do curso de Sistemas de Informação</td>
-                    <td><a (click)="edit()">Editar</a></td>
-                    <td><a (click)="delete()">Excluir</a></td>
-                </tr>
-                <tr>
-                    <td>Sala de Aula - Administração</td>
-                    <td>Fraco - 1m</td>
-                    <td>Sala do curso de Administração</td>
+                    <td>{{beacon.message}}</td>
                     <td><a (click)="edit()">Editar</a></td>
                     <td><a (click)="delete()">Excluir</a></td>
                 </tr>

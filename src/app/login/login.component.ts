@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { routerTransition } from '../router.animations';
-import { FirebaseProvider } from '../providers/firebase/firebase';
+import { FirebaseProvider } from '../providers/firebase/FirebaseProvider';
 
 @Component({
     selector: 'app-login',
