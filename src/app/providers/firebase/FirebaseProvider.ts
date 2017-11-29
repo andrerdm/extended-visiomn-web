@@ -21,8 +21,8 @@ export class FirebaseProvider {
     });
   }
 
-  listBeacons(): AngularFireList<BeaconData[]> {
-    return this.afDB.list('/beacons/');
+  listBeacons(): Observable<any[]> {
+    return this.afDB.list('/beacons/').valueChanges();
   }
 
   getUserInfo(): Observable<firebase.User> {

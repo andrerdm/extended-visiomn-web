@@ -16,7 +16,7 @@ export class DashboardComponent implements OnInit {
     public alerts: Array<any> = [];
     public sliders: Array<any> = [];
     public user: string;
-    public beaconList: AngularFireList<BeaconData[]>;
+    public beaconList: Observable<BeaconData[]>;
 
     constructor(public fp: FirebaseProvider) {
     }
