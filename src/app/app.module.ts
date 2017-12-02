@@ -16,6 +16,9 @@ import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
 import { FirebaseProvider } from '../app/providers/firebase/FirebaseProvider';
 
+import { MatDialogModule } from '@angular/material';
+import { DialogDemoComponent } from './dialog-demo/dialog-demo.component';
+
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
     // for development
@@ -25,6 +28,7 @@ export function createTranslateLoader(http: HttpClient) {
 
 @NgModule({
     imports: [
+        MatDialogModule,
         CommonModule,
         BrowserModule,
         BrowserAnimationsModule,
@@ -41,7 +45,7 @@ export function createTranslateLoader(http: HttpClient) {
         }),
         AppRoutingModule
     ],
-    declarations: [AppComponent],
+    declarations: [AppComponent, DialogDemoComponent],
     providers: [AuthGuard, FirebaseProvider],
     bootstrap: [AppComponent]
 })
