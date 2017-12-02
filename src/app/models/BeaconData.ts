@@ -3,5 +3,5 @@ export interface BeaconData {
     message: string;
     name: string;
     company: string;
-    signal: string;
+    signalStrength: string;
 }
