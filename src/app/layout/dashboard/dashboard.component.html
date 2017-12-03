@@ -20,36 +20,69 @@
                     <td>{{beacon.id}}</td>
                     <td>Forte - 5m</td>
                     <td>{{beacon.message}}</td>
-                    <td><a (click)="edit()">Editar</a></td>
-                    <td><a (click)="delete()">Excluir</a></td>
+                    <td><button class="btn btn-lg btn-outline-primary" (click)="edit(editar)">Editar</button></td>
+                    <td><button class="btn btn-lg btn-outline-danger" (click)="exclude(excluir)">Excluir</button></td>
                 </tr>
                 </tbody>
             </table>
+            <button class="btn btn-lg btn-outline-success" (click)="create(criar)">Novo</button>
         </div>
-        <input type="button" name="save">
     </div>
+
+    <ng-template #editar let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h4 class="modal-title">Editar Local</h4>
+          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form role="form">
+                <div class="form-content">
+                    <div class="form-group">
+                        <label for="name">Nome</label>
+                        <input type="text" class="form-control input-underline input-lg" id="name">
+                    </div>
     
-    <div id="beaconcampos">
-        <form role="form">
-            <div class="form-content">
-                <div class="form-group">
-                    <input type="text" class="form-control input-underline input-lg" id="" placeholder="Full Name">
+                    <div class="form-group">
+                        <label for="beaconId">Beacon ID</label>
+                        <input type="text" class="form-control input-underline input-lg" id="beaconId">
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="signalStrenght">Força do Sinal</label>
+                        <select class="form-control" id="signalStrenght">
+                                <option>Forte - 3M</option>
+                                <option>Médio - 2M</option>
+                                <option>Fraco - 1M</option>
+                              </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensagem</label>
+                        <textarea class="form-control" rows="3" id="message"></textarea>
+                    </div>
                 </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" (click)="c('Cancel click')">Cancelar</button>
+            <button type="button" class="btn btn-success" (click)="c('Save click')">Salvar</button>
+        </div>
+    </ng-template>
 
-                <div class="form-group">
-                    <input type="text" class="form-control input-underline input-lg" id="" placeholder="Email">
-                </div>
+    <ng-template #excluir let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <h4 class="modal-title">Excluir este Local?</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" (click)="c('No click')">Não</button>
+            <button type="button" class="btn btn-success" (click)="c('Yes click')">Sim</button>
+        </div>
+    </ng-template>
 
-                <div class="form-group">
-                    <input type="password" class="form-control input-underline input-lg" id="" placeholder="Password">
-                </div>
-                <div class="form-group">
-                    <input type="password" class="form-control input-underline input-lg" id="" placeholder="Repeat Password">
-                </div>
-            </div>
-            <a class="btn rounded-btn" [routerLink]="['/login']"> Log in </a>
-        </form>
-    </div>
- 
-  
 </div>
+
+

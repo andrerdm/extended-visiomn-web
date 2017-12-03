@@ -5,19 +5,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { environment } from '../environments/environment';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule, AngularFireList } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
+import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
 import { FirebaseProvider } from '../app/providers/firebase/FirebaseProvider';
-
-import { MatDialogModule } from '@angular/material';
-import { DialogDemoComponent } from './dialog-demo/dialog-demo.component';
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
@@ -28,7 +26,6 @@ export function createTranslateLoader(http: HttpClient) {
 
 @NgModule({
     imports: [
-        MatDialogModule,
         CommonModule,
         BrowserModule,
         BrowserAnimationsModule,
@@ -43,9 +40,10 @@ export function createTranslateLoader(http: HttpClient) {
                 deps: [HttpClient]
             }
         }),
+        NgbModule.forRoot(),
         AppRoutingModule
     ],
-    declarations: [AppComponent, DialogDemoComponent],
+    declarations: [AppComponent],
     providers: [AuthGuard, FirebaseProvider],
     bootstrap: [AppComponent]
 })
