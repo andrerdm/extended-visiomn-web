@@ -20,12 +20,14 @@
                     <td>{{beacon.id}}</td>
                     <td>Forte - 5m</td>
                     <td>{{beacon.message}}</td>
-                    <td><button class="btn btn-lg btn-outline-primary" (click)="edit(editar)">Editar</button></td>
-                    <td><button class="btn btn-lg btn-outline-danger" (click)="exclude(excluir)">Excluir</button></td>
+                    <td><button class="btn btn-md btn-outline-primary" (click)="edit(editar, beacon)">Editar</button></td>
+                    <td><button class="btn btn-md btn-outline-danger" (click)="exclude(excluir, beacon)">Excluir</button></td>
                 </tr>
                 </tbody>
             </table>
-            <button class="btn btn-lg btn-outline-success" (click)="create(criar)">Novo</button>
+            <div class="text-center">
+                <button class="btn btn-lg btn-success" (click)="create(editar)">Adicionar Local</button>
+            </div>
         </div>
     </div>
 
@@ -41,12 +43,12 @@
                 <div class="form-content">
                     <div class="form-group">
                         <label for="name">Nome</label>
-                        <input type="text" class="form-control input-underline input-lg" id="name">
+                        <input type="text" class="form-control input-underline input-lg" id="name" value="{{selectedBeacon.name}}">
                     </div>
     
                     <div class="form-group">
                         <label for="beaconId">Beacon ID</label>
-                        <input type="text" class="form-control input-underline input-lg" id="beaconId">
+                        <input type="text" class="form-control input-underline input-lg" id="beaconId" value="{{selectedBeacon.id}}">
                     </div>
     
                     <div class="form-group">
@@ -59,7 +61,7 @@
                     </div>
                     <div class="form-group">
                         <label for="message">Mensagem</label>
-                        <textarea class="form-control" rows="3" id="message"></textarea>
+                        <textarea class="form-control" rows="3" id="message" value="{{selectedBeacon.message}}"></textarea>
                     </div>
                 </div>
             </form>

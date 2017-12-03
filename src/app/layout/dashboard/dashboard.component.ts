@@ -14,11 +14,13 @@ import { ModalDismissReasons, NgbModal } from "@ng-bootstrap/ng-bootstrap";
     animations: [routerTransition()]
 })
 export class DashboardComponent implements OnInit {
-    closeResult: string;
     public alerts: Array<any> = [];
     public sliders: Array<any> = [];
     public user: string;
     public beaconList: Observable<BeaconData[]>;
+    public closeResult: string;
+    public selectedBeacon: BeaconData;
+
 
     constructor(public fp: FirebaseProvider, public modalService: NgbModal) {
     }
@@ -27,17 +29,18 @@ export class DashboardComponent implements OnInit {
         this.beaconList = this.fp.listBeacons();
     }
 
-    edit(content) {
-        console.log(content);
+    edit(content, b: BeaconData) {
+        this.selectedBeacon = b;
         this.openModal(content);
     }
 
-    exclude(content) {
-        console.log(content);
+    exclude(content, b: BeaconData) {
+        this.selectedBeacon = b;
         this.openModal(content);
     }
 
     create(content) {
+        this.selectedBeacon = new BeaconData();
         this.openModal(content);
     }
 
