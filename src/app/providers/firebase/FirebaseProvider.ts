@@ -35,17 +35,16 @@ export class FirebaseProvider {
     return this.afAuth.authState;
   }
 
-  update(data) {
-    this.beaconListRef.push(data).then(result => {
-      console.log('Beacon adicionado.')
-      console.log(result);
-    }, error => {
-      console.error(error);
-    });
+  update(oldBeacon, newBeacon) {
+    this.beaconListRef.update(oldBeacon.key, newBeacon);
   }
 
   delete(b) {
     this.beaconListRef.remove(b);
+  }
+
+  create(b) {
+    this.beaconListRef.push(b);
   }
 
 }

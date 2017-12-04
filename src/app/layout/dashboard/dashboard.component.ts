@@ -29,9 +29,9 @@ export class DashboardComponent implements OnInit {
         this.beaconList.forEach(console.log);
     }
 
-    edit(content, b: BeaconData) {
-        this.modalService.open(content).result.then(result => {
-            //Atualizar
+    edit(content, oldBeacon: BeaconData) {
+        this.modalService.open(content).result.then(newBeacon => {
+            this.fp.update(oldBeacon, newBeacon);
         }, (reason) => {
             this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
             console.log(this.closeResult);
@@ -49,7 +49,7 @@ export class DashboardComponent implements OnInit {
 
     create(content) {
         this.modalService.open(content).result.then(result => {
-            this.fp.update(result);
+            this.fp.create(result);
         }, (reason) => {
             this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
             console.log(this.closeResult);
