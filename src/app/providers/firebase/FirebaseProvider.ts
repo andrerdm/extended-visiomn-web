@@ -29,4 +29,12 @@ export class FirebaseProvider {
     return this.afAuth.authState;
   }
 
+  update() {
+    
+  }
+
+  delete() {
+
+  }
+
 }

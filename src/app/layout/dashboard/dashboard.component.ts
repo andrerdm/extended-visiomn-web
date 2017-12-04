@@ -21,7 +21,6 @@ export class DashboardComponent implements OnInit {
     public closeResult: string;
     public selectedBeacon: BeaconData;
 
-
     constructor(public fp: FirebaseProvider, public modalService: NgbModal) {
     }
 
@@ -30,25 +29,24 @@ export class DashboardComponent implements OnInit {
     }
 
     edit(content, b: BeaconData) {
-        this.selectedBeacon = b;
         this.openModal(content);
     }
 
     exclude(content, b: BeaconData) {
-        this.selectedBeacon = b;
         this.openModal(content);
     }
 
     create(content) {
-        this.selectedBeacon = new BeaconData();
         this.openModal(content);
     }
 
     openModal(content) {
-        this.modalService.open(content).result.then((result) => {
-          this.closeResult = `Closed with: ${result}`;
+        this.modalService.open(content).result.then(result => {
+            this.fp.update();
+
         }, (reason) => {
-          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+            this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+            console.log(this.closeResult);
         });
       }
     
