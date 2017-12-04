@@ -30,7 +30,16 @@ export class DashboardComponent implements OnInit {
     }
 
     edit(content, oldBeacon: BeaconData) {
+        this.selectedBeacon = {
+            key: oldBeacon.key,
+            name: oldBeacon.name,
+            id: oldBeacon.id,
+            signalStrength: oldBeacon.signalStrength,
+            message: oldBeacon.message
+        };
+
         this.modalService.open(content).result.then(newBeacon => {
+            console.log(newBeacon);
             this.fp.update(oldBeacon, newBeacon);
         }, (reason) => {
             this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -48,6 +57,13 @@ export class DashboardComponent implements OnInit {
     }
 
     create(content) {
+        this.selectedBeacon = {
+            name: "",
+            id: "",
+            signalStrength: "",
+            message: ""
+        };
+
         this.modalService.open(content).result.then(result => {
             this.fp.create(result);
         }, (reason) => {
@@ -63,6 +79,20 @@ export class DashboardComponent implements OnInit {
             return 'by clicking on a backdrop';
         } else {
             return  `with: ${reason}`;
+        }
+    }
+
+    getSignal(level) {
+        console.log(level);
+        switch(level) {
+            case '1' : 
+                return "Fraco - 1M";
+            case '2' :
+                return "Médio - 2M";
+            case '3' :
+                return "Forte - 3M";
+            default :
+                return "Forte - 3M";
         }
     }
 
