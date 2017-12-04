@@ -7,6 +7,7 @@ import { BeaconData } from '../../models/BeaconData';
 
 @Injectable()
 export class FirebaseProvider {
+  private beaconListRef = this.afDB.list<BeaconData>('/beacons/');
 
   constructor(public afAuth: AngularFireAuth, public afDB: AngularFireDatabase) {
   }
@@ -22,19 +23,29 @@ export class FirebaseProvider {
   }
 
   listBeacons(): Observable<any[]> {
-    return this.afDB.list('/beacons/').valueChanges();
+    return this.beaconListRef.snapshotChanges()
+      .map(changes => {
+        return changes.map(c => ({
+          key: c.payload.key, ...c.payload.val()
+        }));
+      });
   }
 
   getUserInfo(): Observable<firebase.User> {
     return this.afAuth.authState;
   }
 
-  update() {
-    
+  update(data) {
+    this.beaconListRef.push(data).then(result => {
+      console.log('Beacon adicionado.')
+      console.log(result);
+    }, error => {
+      console.error(error);
+    });
   }
 
-  delete() {
-
+  delete(b) {
+    this.beaconListRef.remove(b);
   }
 
 }

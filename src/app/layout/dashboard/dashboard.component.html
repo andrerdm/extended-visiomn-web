@@ -21,7 +21,7 @@
                     <td>Forte - 5m</td>
                     <td>{{beacon.message}}</td>
                     <td><button class="btn btn-md btn-outline-primary" (click)="edit(editar, beacon)">Editar</button></td>
-                    <td><button class="btn btn-md btn-outline-danger" (click)="exclude(excluir, beacon)">Excluir</button></td>
+                    <td><button class="btn btn-md btn-outline-danger" (click)="exclude(excluir, beacon.key)">Excluir</button></td>
                 </tr>
                 </tbody>
             </table>
@@ -53,7 +53,7 @@
     
                     <div class="form-group">
                         <label for="signalStrenght">Força do Sinal</label>
-                        <select class="form-control" ngModel name="signalStrenght" required>
+                        <select class="form-control" ngModel name="signalStrength" required>
                                 <option value="3">Forte - 3M</option>
                                 <option value="2">Médio - 2M</option>
                                 <option value="1">Fraco - 1M</option>
@@ -80,8 +80,10 @@
             </button>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-danger" (click)="d('No click')">Não</button>
-            <button type="button" class="btn btn-success" (click)="c('Yes click')">Sim</button>
+            <div class="col-md-12 text-center">
+                <button type="button" class="btn btn-danger" (click)="d('No click')">Não</button>
+                <button type="button" class="btn btn-success" (click)="c('Yes click')">Sim</button>
+            </div>
         </div>
     </ng-template>
 

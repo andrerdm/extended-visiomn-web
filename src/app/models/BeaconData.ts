@@ -1,11 +1,7 @@
-export class BeaconData {
+export interface BeaconData {
+    key?: string;
     id: string;
     message: string;
     name: string;
-    company: string;
     signalStrength: string;
-
-    constructor(){
-        
-    }
 }

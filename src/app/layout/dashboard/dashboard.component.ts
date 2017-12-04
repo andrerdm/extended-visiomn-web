@@ -26,29 +26,35 @@ export class DashboardComponent implements OnInit {
 
     ngOnInit() {
         this.beaconList = this.fp.listBeacons();
+        this.beaconList.forEach(console.log);
     }
 
     edit(content, b: BeaconData) {
-        this.openModal(content);
-    }
-
-    exclude(content, b: BeaconData) {
-        this.openModal(content);
-    }
-
-    create(content) {
-        this.openModal(content);
-    }
-
-    openModal(content) {
         this.modalService.open(content).result.then(result => {
-            this.fp.update();
-
+            //Atualizar
         }, (reason) => {
             this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
             console.log(this.closeResult);
         });
-      }
+    }
+
+    exclude(content, b) {
+        this.modalService.open(content).result.then(result => {
+            this.fp.delete(b); 
+        }, (reason) => {
+            this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+            console.log(this.closeResult);
+        });
+    }
+
+    create(content) {
+        this.modalService.open(content).result.then(result => {
+            this.fp.update(result);
+        }, (reason) => {
+            this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+            console.log(this.closeResult);
+        });
+    }
     
     getDismissReason(reason: any): string {
         if (reason === ModalDismissReasons.ESC) {
